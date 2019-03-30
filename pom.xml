@@ -7,7 +7,7 @@
     <groupId>com.wojciechwaldon</groupId>
     <artifactId>cqrs</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>cqrs-infrastucture</module>
         <module>cqrs-api</module>
@@ -16,6 +16,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.wojciechwaldon</groupId>
+                <artifactId>dependency-versions</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.wojciechwaldon.cqrs</groupId>
                 <artifactId>cqrs-api</artifactId>
@@ -30,12 +38,6 @@
                 <groupId>com.wojciechwaldon.cqrs</groupId>
                 <artifactId>cqrs-infrastucture</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
