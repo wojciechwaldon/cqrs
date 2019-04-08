@@ -2,6 +2,7 @@ package com.wojciechwaldon.cqrs.application.handlers;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
+@Slf4j
 abstract class SpringHandlersProvider implements ApplicationListener<ContextRefreshedEvent> {
 
     @NonNull
@@ -28,11 +30,11 @@ abstract class SpringHandlersProvider implements ApplicationListener<ContextRefr
         for (String beanName : handlerNames) {
             BeanDefinition handler = beanFactory.getBeanDefinition(beanName);
             try {
-                String className = null;
-                className = getClassName(handler, className);
+                String className = getClassName(handler, beanName);
                 Class<?> handlerClass = Class.forName(className);
                 handlers.put(getHandledType(handlerClass), beanName);
             } catch (ClassNotFoundException e) {
+                log.error("Handler {} not found", beanName);
                 throw new RuntimeException(e);
             }
         }

@@ -12,6 +12,7 @@ public class SpringQueryExecutor implements QueryExecutor {
 
     private QueryHandlersProvider queryHandlersProvider;
 
+    @SuppressWarnings("unchecked")
     public QueryView execute(Query query) throws Exception {
         QueryHandler<Query, QueryView> handler = queryHandlersProvider.getHandler(query);
         return handler.handle(query);
